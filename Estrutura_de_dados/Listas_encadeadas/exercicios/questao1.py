@@ -187,6 +187,35 @@ class Lista_Encadeada:
         
     def esvazia_lista(self):
         return self.__inicio == None
+    
+    def ordenar(self):
+        if self.__inicio != None:
+            p = self.__inicio
+            while p != None:
+                no_menor = p
+                q = p.prox
+                while q != None:
+                    if q.dado < no_menor.dado:
+                        no_menor = q
+                    q = q.prox
+                
+                if no_menor != p:
+                    troca = p.dado
+                    p.dado = no_menor.dado
+                    no_menor.dado = troca
+                
+                p = p.prox
+
+    def contar(self, valor):
+        if self.__inicio != None:
+            p = self.__inicio
+            ocorrencias = 0
+            while p != None:
+                if p.dado == valor:
+                    ocorrencias += 1
+                p = p.prox
+
+            return ocorrencias         
         
     def __str__(self):
         saida = 'Lista: ['
