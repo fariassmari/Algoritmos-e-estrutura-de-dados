@@ -128,29 +128,7 @@ class Lista_Encadeada:
             return p.dado
         else:
             return None
-
-    def trocar_pos(self, pos1, pos2):
-        if self.__inicio != None or pos1 != pos2:
-            if pos1 > pos2:    
-                pos1, pos2 = pos2, pos1
-
-            no1 = None
-            no2 = None
-
-            p = self.__inicio
-            i = 1
-            while p != None:
-                if i == pos1:
-                    no1 = p
-                if i == pos2:
-                    no2 = p
-                p = p.prox
-                i += 1
-
-            troca = no1.dado
-            no1.dado = no2.dado
-            no2.dado = troca
-
+        
     def __str__(self):
         saida = 'Lista: ['
         p = self.__inicio
@@ -162,19 +140,52 @@ class Lista_Encadeada:
                 saida += ', '
         saida += ']'
         return saida
+
+    def soma(self):
+        def _soma(no):
+            if no is None:
+                return 0
+            else: 
+                return no.dado + _soma(no.prox)
+        return _soma(self.__inicio)
+
+    def inversao(self):
+        def _inversao(no):
+            if no is None or no.prox is None:
+                return no
+            
+            novo_inicio = _inversao(no.prox)
+
+            no.prox.prox = no
+            no.prox = None
+
+            return novo_inicio
+
+        self.__inicio = _inversao(self.__inicio)
+            
+    def cont(self):
+        def _cont(no):
+            if no == None:
+                return 0
+            else:
+                return 1 + _cont(no.prox)
+        return _cont(self.__inicio)
+        
         
 if __name__ == '__main__':
     lista = Lista_Encadeada()
 
     # adicionar
-    lista.adicionar_final(No('4'))
-    lista.adicionar_final(No('5'))
-    lista.adicionar_inicio(No('2'))
-    lista.adicionar_meio(2, No('3'))
-    print(lista)  # Lista: [0, 1,5, 1, 2]
-
-    lista.trocar_pos(1, 2)
-    print(lista) 
-
+    no = input('Digite a palavra: ')
+    for c in no:
+        lista.adicionar_final(No(c))
     
+    print(lista.cont())
+    lista.inversao()
+    print(lista)
+    
+
+
             
+
+
