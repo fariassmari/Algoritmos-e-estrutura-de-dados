@@ -72,6 +72,15 @@ class Arvore_Binaria:
             return 1 
         else:
             return self.nos_folhas(no.esq) + self.nos_folhas(no.dir)
+        
+    def nao_folhas(self, no):
+        if no == None:
+            return 0
+        if no.esq == None and no.dir == None:
+            return 0 
+        else:
+            return 1 + self.nao_folhas(no.esq) + self.nao_folhas(no.dir)
+
 
     def busca_valor(self, no, valor):
         if no != None:
@@ -114,4 +123,5 @@ if __name__ == '__main__':
 
     print(arvore.nos(arvore.root))
     print(arvore.nos_folhas(arvore.root))
+    print(arvore.nao_folhas(arvore.root))
     print(arvore.busca_valor(arvore.root, 7))

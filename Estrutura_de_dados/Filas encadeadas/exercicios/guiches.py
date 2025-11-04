@@ -84,6 +84,7 @@ if __name__ == '__main__':
         if opcao == '1':
             clientes.adicionar(No(f'Cliente{prox_senha}'))
             prox_senha += 1
+
         elif opcao == '2':
             if not clientes.esta_vazia():
                 guiche = guiches.inicio
@@ -93,6 +94,7 @@ if __name__ == '__main__':
                         clientes.remover()
                         break
                     guiche = guiche.prox
+                    
         elif opcao == '3':
             guiche = guiches.inicio
             numero_guiche = 1

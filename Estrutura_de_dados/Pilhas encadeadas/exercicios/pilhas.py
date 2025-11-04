@@ -54,8 +54,55 @@ class Pilha_Encadeada:
                 if p.dado == valor:
                     p.dado = novo_valor
                 p = p.prox
+
+    def parenteses(self):
+        if self.__topo != None:
+            pilha = Pilha_Encadeada()
+            p = self.__topo
+            while p != None:
+                if p.dado == '(':
+                    pilha.empilhar(No('('))
+                elif p.dado == ')':
+                    if pilha.esta_vazia():
+                        return False
+                    pilha.desempilhar()
+                p = p.prox
+
+            return pilha.esta_vazia()
         
-    
+    def binario(self, numero):
+        if self.__topo != None:
+            binario = Pilha_Encadeada()
+            while numero > 0:
+                resto = p % 2
+                binario.empilhar(No(resto))
+                numero = numero // 2
+
+            return binario
+
+
+    def ordem(self):
+        if self.__topo != None:
+            p = self.__topo
+            while p.prox != None:
+                if p.dado > p.prox.dado:
+                    p.dado, p.prox.dado = p.prox.dado, p.dado
+                p = p.prox
+
+    def espaco(self, no):
+        if self.__topo != None:
+            if no.dado == ' ':
+                return 1 + self.espaco(no.prox)
+            else:
+                return 0
+            
+
+    def qtd_esp(self):
+        if p:
+            if p[0] == ' ':
+                return 1 + self.qtd_esp(p[1:])
+        return 0
+
     def __str__(self):
         saida = '['
         p = self.__topo
@@ -71,20 +118,31 @@ if __name__ == '__main__':
 
     p = Pilha_Encadeada()
 
-    p.empilhar(No("A"))
-    p.empilhar(No("B"))
-    p.empilhar(No("C"))
-    p.empilhar(No("D"))
+    p.empilhar(No("5"))
+    p.empilhar(No("4"))
+    p.empilhar(No("78"))
+    p.empilhar(No("1"))
+    
+    parent = Pilha_Encadeada()
 
+    parent.empilhar(No(")"))
+    parent.empilhar(No("("))
+    parent.empilhar(No(")"))
+    parent.empilhar(No("("))
+
+    print(parent.parenteses())
+
+    p.ordem()
     print(p)
 
-    p.trocar("A", "B")
-    print(p)
+    pilha = Pilha_Encadeada()
+    numero = int(input("Digite um número inteiro: "))
 
-    p.desempilhar()
-    print(p)
+    pilha.empilhar(No(numero))
+    binario = pilha.binario(numero)
 
-    p.desempilhar()
-    print(p)
+    print(f"Representação binária de {numero}: ", end="")
+    print(binario)
 
+    
 

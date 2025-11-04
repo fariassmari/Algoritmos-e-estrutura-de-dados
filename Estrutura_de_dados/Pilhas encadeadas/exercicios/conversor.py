@@ -10,7 +10,7 @@ if __name__ == '__main__':
     while numero >= 1:
         restos = numero % 2
         conversor.empilhar(No(restos))
-        numero =  numero // 2
+        numero = numero // 2
 
     while not conversor.esta_vazia():
         no = conversor.desempilhar()
