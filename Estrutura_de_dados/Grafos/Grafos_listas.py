@@ -149,7 +149,7 @@ class Grafo():
         pilha = []
         saida = []
 
-        pilha.append(inicio)
+        pilha.insert(0, inicio)
 
         while pilha != []:
             atual = pilha.pop()
@@ -158,12 +158,23 @@ class Grafo():
                 visitado.append(atual)
                 saida.append(atual.dado)
 
-                for edge in atual.adj:
+                for edge in reversed(atual.adj):
                     vizinho = edge.destino
-
                     if vizinho not in visitado:
                         pilha.append(vizinho)
         return saida
+    
+    def dfs_rec(self, vertice, visitado, saida):
+        if vertice in visitado:
+            return
+
+        visitado.append(vertice)
+        saida.append(vertice.dado)
+
+        for edge in vertice.adj:
+            vizinho = edge.destino
+            if vizinho not in visitado:
+                self.dfs_rec(vertice, visitado, saida)
     
     def __str__(self):
         r = ''
